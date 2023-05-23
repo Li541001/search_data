@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>分數查詢</title>
+</head>
+<body>
+    <div class="container">
+        <div class="title">分數查詢</div>
+        <div class="input-box">
+            <span class="input-text">學號</span>
+            <input id='input-action' type="text" onchange="change()"></input>
+        </div>
+        <input id="input-button" type="button"  value="search"></input>
+        <div class="display">
+            <table>
+                <tr>
+                    <td class="display-text">國文</td>
+                    <td class="display-text">英文</td>
+                    <td class="display-text">數學</td>
+                    <td class="display-text">專一</td>
+                    <td class="display-text">專二</td>
+                </tr>
+                <tr>
+                    <td class="display-text" id="chinese"></td>
+                    <td class="display-text" id="english"></td>
+                    <td class="display-text" id="math"></td>
+                    <td class="display-text" id="one"></td>
+                    <td class="display-text" id="two"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script>
+        const API_GET_URL = 'https://api.jsonstorage.net/v1/json/4eed805d-59cf-4ff8-ad3b-faf98c316270/c0e5a20d-e108-45d2-9097-19ef727e7af4'
+        const button = document.getElementById('input-button').addEventListener('click',()=>click());
+        const text = document.getElementById('input-action')
+        const chinese = document.getElementById('chinese');
+        const english = document.getElementById('english');
+        const math = document.getElementById('math');
+        const one = document.getElementById('one');
+        const two = document.getElementById('two');
+        const container = document.getElementsByClassName('container')
+        let value;
+        let data;
+        const click = async()=>{
+            data = await getApiData()
+            data = data[String(value)]
+            chinese.innerHTML = data['chinese']
+            english.innerHTML = data['english']
+            math.innerHTML = data['math']
+            one.innerHTML = data['one']
+            two.innerHTML = data['two']
+        }
+        const change = ()=>{    
+            value = Number(text.value);
+            
+        };
+        
+        const getApiData = async () => {
+            const response = await fetch(API_GET_URL);
+            const database = await response.json();
+            const data = database;
+            return data;
+        };
+        const addDiv=()=>{
+            document.createElement()
+        }
+    </script>
+</body>
+</html>
