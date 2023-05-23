@@ -5,9 +5,10 @@ import json
 
 
 STUDENT_NUMBER = 7      #設定學生數量 需比原學生數多一人
+EXCEL_FILE_PATH = 'database.xlsx'   #excel檔案位置
 
 new_object = {}
-xlsx = load_workbook('dataBase.xlsx')
+xlsx = load_workbook(EXCEL_FILE_PATH)
 xlsxs = xlsx.active
 
 response = requests.get('https://api.jsonstorage.net/v1/json/4eed805d-59cf-4ff8-ad3b-faf98c316270/c0e5a20d-e108-45d2-9097-19ef727e7af4')
