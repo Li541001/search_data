@@ -43,15 +43,22 @@ body{
 }
 .display{
     height: 15vh;
-    width: 15vw;
+    width: 30vw;
 }
 table{
     height: 100%;
     width: 100%;
     text-decoration: none;
 }
+tr{
+    display: flex;
+    justify-content: center;
+}
 
 .display-text{
-    font-size: 20px;
+    text-align: center;
+    width: 50px;
+    height: 20px;
+    font-size: 18px;
     color: aliceblue;
 }

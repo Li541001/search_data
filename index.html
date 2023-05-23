@@ -12,53 +12,80 @@
         <div class="title">分數查詢</div>
         <div class="input-box">
             <span class="input-text">學號</span>
-            <input id='input-action' type="text" onchange="change()"></input>
+            <input id='input-id' type="text" onchange="change1()"></input>
         </div>
+        <div class="input-box">
+            <span class="input-text">密碼</span>
+            <input id='input-password' type="text" onchange="change2()"></input>
+        </div>
+        <div class="input-text" id="status"></div>
         <input id="input-button" type="button"  value="search"></input>
         <div class="display">
             <table>
-                <tr>
-                    <td class="display-text">國文</td>
-                    <td class="display-text">英文</td>
-                    <td class="display-text">數學</td>
-                    <td class="display-text">專一</td>
-                    <td class="display-text">專二</td>
-                </tr>
-                <tr>
-                    <td class="display-text" id="chinese"></td>
-                    <td class="display-text" id="english"></td>
-                    <td class="display-text" id="math"></td>
-                    <td class="display-text" id="one"></td>
-                    <td class="display-text" id="two"></td>
-                </tr>
+                <tr id="keys">           <!-- 添加標籤-->           </tr> 
+                <tr id="values">         <!-- 添加標籤-->           </tr>
             </table>
         </div>
     </div>
     <script>
         const API_GET_URL = 'https://api.jsonstorage.net/v1/json/4eed805d-59cf-4ff8-ad3b-faf98c316270/c0e5a20d-e108-45d2-9097-19ef727e7af4'
         const button = document.getElementById('input-button').addEventListener('click',()=>click());
-        const text = document.getElementById('input-action')
-        const chinese = document.getElementById('chinese');
-        const english = document.getElementById('english');
-        const math = document.getElementById('math');
-        const one = document.getElementById('one');
-        const two = document.getElementById('two');
-        const container = document.getElementsByClassName('container')
-        let value;
+        const idText = document.getElementById('input-id')
+        const passwordText = document.getElementById('input-password')
+        const status = document.getElementById('status')
+        const keys = document.getElementById('keys')
+        const values = document.getElementById('values')
+        
+        let id;
+        let password;
         let data;
+        let tagKey = '';
+        let tagValue = '';
         const click = async()=>{
             data = await getApiData()
-            data = data[String(value)]
-            chinese.innerHTML = data['chinese']
-            english.innerHTML = data['english']
-            math.innerHTML = data['math']
-            one.innerHTML = data['one']
-            two.innerHTML = data['two']
-        }
-        const change = ()=>{    
-            value = Number(text.value);
+            data = data[String(id)]  //取得database得資料
+            if(data == null){
+                status.innerHTML = '學號錯誤';
+                return
+            }
             
+            if(data[String('密碼')] != password){
+                status.innerHTML = '密碼錯誤';
+                return;
+            }
+            status.innerHTML = '查詢成功';
+            const key = Object.keys(data);
+            const value = Object.values(data);
+            
+            let limit = 0;
+            console.log(key);
+       
+            let displayText = document.querySelectorAll('.display-text');
+            console.log(displayText)
+            displayText.forEach((item)=>{
+                item.remove();
+                console.log(item)
+            })
+          
+            
+            for(let i=0; i < key.length;i++){
+                if(key[i] == '密碼') continue;
+                
+                tagKey += `<td class="display-text">${key[i]}</td>`
+                tagValue+=`<td class="display-text">${value[i]}</td>`
+                
+            }
+            keys.innerHTML = tagKey;
+            values.innerHTML = tagValue;
+
+        }
+        const change1 = ()=>{    
+            id = Number(idText.value);
         };
+
+        const change2 = () =>{
+            password = Number(passwordText.value);
+        }
         
         const getApiData = async () => {
             const response = await fetch(API_GET_URL);
@@ -66,9 +93,6 @@
             const data = database;
             return data;
         };
-        const addDiv=()=>{
-            document.createElement()
-        }
     </script>
 </body>
 </html>
