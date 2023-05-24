@@ -6,8 +6,7 @@ import json
 
 STUDENT_NUMBER = 7      #設定學生數量 需比原學生數多一人
 EXCEL_FILE_PATH = 'database.xlsx'   #excel檔案位置
-
-col = input('輸入要讀取欄位英文: ').upper()  #輸入判斷格位
+CHOICE_COLUMN = "BCDEFG"   #輸入判斷格位
 
 
 new_object = {}
@@ -29,7 +28,7 @@ for i in range(2,STUDENT_NUMBER):     #key為標題,value為值
     new_object.update({id:id_object})
     id_object = new_object[id]
     
-    for j in col:
+    for j in CHOICE_COLUMN:
       title = xlsxs[str(j)+'1'].value
       value = str(xlsxs[str(j)+str(i)].value)
       id_object.update({title:value})

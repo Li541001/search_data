@@ -29,7 +29,7 @@
     </div>
     <script>
         const API_GET_URL = 'https://api.jsonstorage.net/v1/json/4eed805d-59cf-4ff8-ad3b-faf98c316270/c0e5a20d-e108-45d2-9097-19ef727e7af4'
-        const button = document.getElementById('input-button').addEventListener('click',()=>click());
+        const button = document.getElementById('input-button').addEventListener('click',() => click());
         const idText = document.getElementById('input-id')
         const passwordText = document.getElementById('input-password')
         const status = document.getElementById('status')
@@ -39,9 +39,10 @@
         let id;
         let password;
         let data;
-        let tagKey = '';
-        let tagValue = '';
+        
         const click = async()=>{
+            let tagKey = '';
+            let tagValue = '';
             data = await getApiData()
             data = data[String(id)]  //取得database得資料
             if(data == null){
@@ -58,22 +59,11 @@
             const value = Object.values(data);
             
             let limit = 0;
-            console.log(key);
-       
-            let displayText = document.querySelectorAll('.display-text');
-            console.log(displayText)
-            displayText.forEach((item)=>{
-                item.remove();
-                console.log(item)
-            })
-          
-            
+
             for(let i=0; i < key.length;i++){
                 if(key[i] == '密碼') continue;
-                
                 tagKey += `<td class="display-text">${key[i]}</td>`
                 tagValue+=`<td class="display-text">${value[i]}</td>`
-                
             }
             keys.innerHTML = tagKey;
             values.innerHTML = tagValue;
@@ -81,6 +71,7 @@
         }
         const change1 = ()=>{    
             id = Number(idText.value);
+            
         };
 
         const change2 = () =>{
@@ -93,6 +84,10 @@
             const data = database;
             return data;
         };
+
+        const handleKeyBoard = (e) => {
+            console.log(e);
+        }
     </script>
 </body>
 </html>
