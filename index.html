@@ -9,7 +9,11 @@
 </head>
 <body>
     <div class="container">
-        <div class="title">分數查詢</div>
+        <div class="title-container">
+            <div class="title">分數查詢</div>
+            <div id="title-sub"></div>
+        </div>
+        
         <div class="input-box">
             <span class="input-text">學號</span>
             <input id='input-id' type="text" onchange="change1()"></input>
@@ -36,6 +40,7 @@
         const status = document.getElementById('status')
         const keys = document.getElementById('keys')
         const values = document.getElementById('values')
+        const name = document.getElementById('title-sub')
         
         let id;
         let password;
@@ -56,15 +61,21 @@
                 return;
             }
             status.innerHTML = '查詢成功';
+            name.innerHTML = data['name']
             const key = Object.keys(data);
             const value = Object.values(data);
             
             let limit = 0;
 
             for(let i=0; i < key.length;i++){
-                if(key[i] == '密碼') continue;
+                if(key[i] == '密碼' || key[i] == 'name') continue;
                 tagKey += `<td class="display-text">${key[i]}</td>`
-                tagValue+=`<td class="display-text">${value[i]}</td>`
+                if(Number(value[i]) <= 60){
+                    tagValue+=`<td class="display-text fall">${value[i]}</td>`
+                }else{
+                    tagValue+=`<td class="display-text">${value[i]}</td>`
+                }
+                
             }
             keys.innerHTML = tagKey;
             values.innerHTML = tagValue;

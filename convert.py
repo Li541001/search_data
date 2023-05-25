@@ -4,6 +4,10 @@ import requests
 import json
 import tkinter
 from tkinter import filedialog
+from pathlib import Path
+
+
+
 
 
 def main():
@@ -39,6 +43,9 @@ def main():
           if(value == "None"):
             break
           id_object.update({title:value})
+      file_name = Path(path.name).stem
+      print(file_name)
+      id_object.update({'name':file_name})
       new_object.update({id:id_object})
   #迴圈取得成績並轉換成正確形式
 

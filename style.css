@@ -40,7 +40,7 @@ body{
     border-radius: 10px;
     background-color: aqua;
     cursor: pointer;
-    margin-bottom: 10vh;
+    
 }
 .display{
     height: 20vh;
@@ -66,4 +66,28 @@ tr{
     font-size: 18px;
     color: black;
     font-weight: bolder;
+}
+#title-sub{
+    color: aliceblue;
+    font-size: 20;
+    font-weight: 500;
+}
+.title-container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+@media (max-width: 820px) {
+    .container{
+        width: 80vw;
+    }
+    #input-button{
+        height: 5vh;
+        width: 20vw;
+    }
+}
+.fall{
+    color: red;
 }
