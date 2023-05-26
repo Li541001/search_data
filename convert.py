@@ -7,12 +7,10 @@ from tkinter import filedialog
 from pathlib import Path
 
 
-
-
-
 def main():
+  # just_open()
   new_object = {}
-  xlsx = load_workbook(path.name)
+  xlsx = load_workbook(path.name,data_only=True)
   xlsxs = xlsx.active
   #連接excel
 

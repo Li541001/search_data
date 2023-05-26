@@ -1,93 +1,153 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+
 *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    color: aliceblue;  
+    font-family: "Quicksand",sans-serif; 
 }
 body{
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
     width: 100vw;
-    flex-direction: column;
-}
-.container{
-    display: flex;
-    padding-top: 10vh;
-
-    justify-content: flex-start;
-    align-items: center;
-    height: 65vh;
-    width: 30vw;
-    background-color: #333;
-    border-radius: 10px;
-    gap: 5vh;
-    flex-direction: column;
-    border:5px solid #000;
-}
-.title{
-    font-size: 48px;
-    font-weight: bold;
-    color: aliceblue;
-}
-.input-text{
-    color: aliceblue;
-}
-#input-button{
-    height: 5vh;
-    width: 5vw;
-    border: none;
-    border-radius: 10px;
-    background-color: aqua;
-    cursor: pointer;
+    height: 100vh;
+    gap: 20px;
+    background-color: #1e2a3c;
     
 }
-.display{
-    height: 20vh;
-    width: 100vw;
-    margin-top: 5vh;
-}
-table{
-    height: 100%;
-    width: 100%;
-    text-decoration: none;
-}
-tr{
+.title-container{
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+}
+.container{
+    overflow:hidden;
+    transition: 1s;
+    background-color: #28292d;
+    border-radius: 10px;
+    height: 420px;
+    width: 360px;
+    border: 2px solid white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    padding: 25px;
+}
+.title{
+    font-size: 2rem;
+    font-weight: bolder;
+    margin-bottom: 10px;
+}
+#title-sub{
+    align-items: center;
+}
+
+.input-box{
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+}
+.input-block{
+    width: 100%;
+    background-color: #28292d;
+    border: 1px solid grey;
+    border-radius: 8px;
+    padding: 10px;
+    outline: none;
+}
+.input-text{
+    padding: 10px;
+    font-size: 0.8rem;
+    position: absolute;
+    left: 0;
+    color: aliceblue;
+    transition: 0.5s;
+}
+
+.input-block:valid ~ .input-text,
+.input-block:focus ~ .input-text{
+    background-color: aquamarine;
+    transform: translate(10px,-30px);
+    border-radius: 5px;
+    color: #333;
+}  
+.input-block:valid,
+.input-block:focus{
+    border-color: aquamarine;
+}
+.input-button-container{
+    width: 100%;
+    padding: 20px;
+}
+#input-button{
+    color: #333;
+    width: 100px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: aquamarine;
+    transition: 0.5s;
+}
+#input-button:hover{
+    box-shadow: 0 0 0 5px rgba(127, 255, 212, 0.2),
+    0 0 0 5px rgba(127, 255, 212, 0.1),
+    0 0 0 10px rgba(127, 255, 212, 0.05),
+    0 0 0 20px rgba(127, 255, 212, 0.02);
+}
+.text-action{
+    transform: translateX(-500px);
+    animation: displayScore 2s 7s ease-out forwards;
+}
+
+@keyframes displayScore {
+    0%{
+        transform: translateX(-500px);
+    }
+    100%{
+        transform: translateX(0%);
+    }
+}
+@keyframes displayText{
+    0%{
+        filter: blur(10px);
+        opacity: 0;
+    }
+    100%{
+        filter: blur(0px);
+        opacity: 1;
+    }
+}   
+.display{   
+    width: 200px;
+    height: 50vh;
+    opacity: 0;
+    filter: blur(10px);
+    animation: displayText 1s 7s linear forwards;
+}
+
+.fall{
+    color: red;
 }
 
 .display-text{
-    margin: 1px;    
-    padding: 0;
+    display: inline-block;
     text-align: center;
+    font-size: 16px;
     width: 80px;
-    height: 20px;
-    font-size: 18px;
-    color: black;
-    font-weight: bolder;
+    margin: 1px;    
 }
-#title-sub{
-    color: aliceblue;
-    font-size: 20;
-    font-weight: 500;
-}
-.title-container{
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
 @media (max-width: 820px) {
-    .container{
-        width: 80vw;
+    body{
+        flex-direction: column;
     }
-    #input-button{
-        height: 5vh;
-        width: 20vw;
+    .display{
+        height: auto;
+        width: auto;
     }
-}
-.fall{
-    color: red;
+    
 }

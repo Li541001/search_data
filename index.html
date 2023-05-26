@@ -10,25 +10,26 @@
 <body>
     <div class="container">
         <div class="title-container">
-            <div class="title">分數查詢</div>
-            <div id="title-sub"></div>
+            <div class="title">成績查詢</div>
+            <div id="title-sub" class="text-action"></div>
+        </div>
+        <div class="input-box">
+            <input class="input-block" id='input-id' type="text" onchange="change1()" required></input>
+            <span class="input-text">STUDENT ID</span>
+        </div>
+        <div class="input-box">
+            <input class="input-block" id='input-password' type="password" onchange="change2()" required></input>
+            <span class="input-text">PASSWORD</span>
+        </div>
+        <div class='status-text text-action' id="status"></div>
+        <div class="input-button-container">
+            <input id="input-button" type="button"  value="search"></input>
         </div>
         
-        <div class="input-box">
-            <span class="input-text">學號</span>
-            <input id='input-id' type="text" onchange="change1()"></input>
-        </div>
-        <div class="input-box">
-            <span class="input-text">密碼</span>
-            <input id='input-password' type="text" onchange="change2()"></input>
-        </div>
-        <div class="input-text" id="status"></div>
-        <input id="input-button" type="button"  value="search"></input>
     </div>
     <div class="display">
-        <table>
-            <tr id="keys">           <!-- 添加標籤-->           </tr> 
-            <tr id="values">         <!-- 添加標籤-->           </tr>
+        <table id="score">
+            <!-- 添加標籤--> 
         </table>
     </div>
     
@@ -38,8 +39,7 @@
         const idText = document.getElementById('input-id')
         const passwordText = document.getElementById('input-password')
         const status = document.getElementById('status')
-        const keys = document.getElementById('keys')
-        const values = document.getElementById('values')
+        const score = document.getElementById('score')
         const name = document.getElementById('title-sub')
         
         let id;
@@ -49,6 +49,7 @@
         const click = async()=>{
             let tagKey = '';
             let tagValue = '';
+            let tag = '';
             data = await getApiData()
             data = data[String(id)]  //取得database得資料
             if(data == null){
@@ -69,16 +70,16 @@
 
             for(let i=0; i < key.length;i++){
                 if(key[i] == '密碼' || key[i] == 'name') continue;
-                tagKey += `<td class="display-text">${key[i]}</td>`
+                tagKey = `<td class="display-text">${key[i]}</td>`
                 if(Number(value[i]) <= 60){
-                    tagValue+=`<td class="display-text fall">${value[i]}</td>`
+                    tagValue =`<td class="display-text fall">${value[i]}</td>`
                 }else{
-                    tagValue+=`<td class="display-text">${value[i]}</td>`
+                    tagValue =`<td class="display-text">${value[i]}</td>`
                 }
-                
+                tag += `<tr>${tagKey+tagValue}</tr> `;
             }
-            keys.innerHTML = tagKey;
-            values.innerHTML = tagValue;
+            score.innerHTML = tag;
+            
 
         }
         const change1 = ()=>{    
