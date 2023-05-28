@@ -104,6 +104,7 @@ body{
     left: 0;
     color: aliceblue;
     transition: 0.5s;
+    pointer-events: none;
 }
 
 .input-block:valid ~ .input-text,
@@ -136,14 +137,11 @@ body{
     border: none;
     background-color: rgb(158, 250, 219);
     box-shadow: aquamarine 0px 7px 29px 0px;
-    /* box-shadow: 0 0 0 5px rgba(127, 255, 212, 0.2),
-    0 0 0 5px rgba(127, 255, 212, 0.1),
-    0 0 0 10px rgba(127, 255, 212, 0.05),
-    0 0 0 20px rgba(127, 255, 212, 0.02); */
 }
 .text-action{
     transform: translateX(-500px);
     animation: displayScore 2s 7s ease-out forwards;
+    -webkit-animation: displayScore 2s 7s ease-out forwards;
 }
 
 @keyframes displayScore {
@@ -170,6 +168,7 @@ body{
     opacity: 0;
     filter: blur(10px);
     animation: displayText 1s 7s linear forwards;
+    -webkit-animation: displayText 1s 7s linear forwards;
 }
 
 .fall{
@@ -198,14 +197,15 @@ body{
 /* new-------------------------------------------------------------------------------- */
 .socket {
     z-index: -999;
-    width: 200px;
-    height: 200px;
+    width: 100vw;
+    height: 100vh;
     position: absolute;
-    left: 50%;
+    /* left: 50%;
     margin-left: -100px;
     top: 50%;
-    margin-top: -100px;
-  }
+    margin-top: -100px;*/
+    overflow: hidden;
+  } 
   
   .hex-brick {
     background: #1e2a3c;
