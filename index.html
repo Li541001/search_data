@@ -8,13 +8,13 @@
     <title>分數查詢</title>
 </head>
 <body>
-    <div class="socket">
+    <div class="socket" id="main">
         <div class="gel center-gel">
             <div class="hex-brick h1"></div>
             <div class="hex-brick h2"></div>
             <div class="hex-brick h3"></div>
         </div>
-        <div class="gel c1 r1">
+        <!-- <div class="gel c1 r1">
             <div class="hex-brick h1"></div>
             <div class="hex-brick h2"></div>
             <div class="hex-brick h3"></div>
@@ -466,12 +466,12 @@
             <div class="hex-brick h2"></div>
             <div class="hex-brick h3"></div>
         </div>
-        <div class="gel c90 r4">
+        <div class="gel c90 r4" >
             <div class="hex-brick h1"></div>
             <div class="hex-brick h2"></div>
             <div class="hex-brick h3"></div>
-        <!-- </div>
-        <div class="gel c91 r4">
+        </div> -->
+        <!-- <div class="gel c91 r4">
             <div class="hex-brick h1"></div>
             <div class="hex-brick h2"></div>
             <div class="hex-brick h3"></div>
@@ -595,6 +595,72 @@
         const status = document.getElementById('status')
         const score = document.getElementById('score')
         const name = document.getElementById('title-sub')
+        const main = document.getElementById('main');
+
+        const init = ()=>{
+            let tag = '<div class="gel center-gel"><div class="hex-brick h1"></div><div class="hex-brick h2"></div><div class="hex-brick h3"></div></div>'
+            let marginStyle=''
+            let heightTemp,realHeight
+            let widthTemp,realwidth
+            let times
+            for(let i = 1 ;i<=25;i++){
+                if(i>7 && i%2 == 0){
+                        times = i-1
+                    }else{
+                        times = i
+                    }
+                marginStyle = `margin-left: ${37+52*(i-1)}px; margin-top: -15px;`
+                tag += `<div class="gel r${times}" style="${marginStyle}"> <div class="hex-brick h1" ></div><div class="hex-brick h2"> </div><div class="hex-brick h3"> </div></div>`
+                widthTemp = 37+52*(i-1)
+                realwidth = widthTemp;
+
+                for(let j = 1; j<=i;j++){   //右上
+                    marginStyle = `margin-left: ${realwidth-26*j}px; margin-top: ${-15-45*j}px;`
+                    tag += `<div class="gel r${times}" style="${marginStyle}"> <div class="hex-brick h1" ></div><div class="hex-brick h2"> </div><div class="hex-brick h3"> </div></div>`
+                    widthTemp = realwidth-26*j
+                    heightTemp = -15-45*j
+                }
+                realwidth = widthTemp
+                realHeight = heightTemp
+
+                for(let j=1;j<=i;j++){  //上面
+                    marginStyle = `margin-left: ${realwidth-52*j}px; margin-top: ${realHeight}px;`
+                    tag += `<div class="gel r${times}" style="${marginStyle}"> <div class="hex-brick h1" ></div><div class="hex-brick h2"> </div><div class="hex-brick h3"> </div></div>`
+                    widthTemp = realwidth-52*j
+                }
+                realwidth = widthTemp
+
+                for(let j=1;j<=i;j++){  //左上
+                    marginStyle = `margin-left: ${realwidth-26*j}px; margin-top: ${realHeight+45*j}px;`
+                    tag += `<div class="gel r${times}" style="${marginStyle}"> <div class="hex-brick h1" ></div><div class="hex-brick h2"> </div><div class="hex-brick h3"> </div></div>`
+                    widthTemp = realwidth-26*j
+                    heightTemp = realHeight+45*j
+                }
+                realHeight = heightTemp
+                realwidth = widthTemp
+                for(let j=1;j<=i;j++){  //左下
+                    marginStyle = `margin-left: ${realwidth+26*j}px; margin-top: ${realHeight+45*j}px;`
+                    tag += `<div class="gel r${times}" style="${marginStyle}"> <div class="hex-brick h1" ></div><div class="hex-brick h2"> </div><div class="hex-brick h3"> </div></div>`
+                    widthTemp = realwidth+26*j
+                    heightTemp = realHeight+45*j
+                }
+                realwidth = widthTemp
+                realHeight = heightTemp
+
+                for(let j=1;j<=i;j++){  //下面
+                    marginStyle = `margin-left: ${realwidth+52*j}px; margin-top: ${realHeight}px;`
+                    tag += `<div class="gel r${times}" style="${marginStyle}"> <div class="hex-brick h1" ></div><div class="hex-brick h2"> </div><div class="hex-brick h3"> </div></div>`
+                    widthTemp = realwidth+52*j
+                }
+                realwidth = widthTemp
+                for(let j=1;j<i;j++){  //右下
+                    marginStyle = `margin-left: ${realwidth+26*j}px; margin-top: ${realHeight-45*j}px;`
+                    tag += `<div class="gel r${times}" style="${marginStyle}"> <div class="hex-brick h1" ></div><div class="hex-brick h2"> </div><div class="hex-brick h3"> </div></div>`
+                }
+            }
+            main.innerHTML = tag;
+        }
+        window.onload = init;
         
         let id;
         let password;
@@ -655,6 +721,8 @@
         const handleKeyBoard = (e) => {
             console.log(e);
         }
+
+        
     </script>
 </body>
 </html>
